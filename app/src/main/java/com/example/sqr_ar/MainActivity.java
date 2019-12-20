@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                 if(cardset.contains(image.getName())){//ตรงนี้มันจะเช็คว่ารูปที่เจอมันอยู่ในชุดบัตรคำที่อยู่ใน db ที่เราเรียกใช้หรือเปล่า
 
                     Log.e("LOG","+++++Tracking Found SET cardset ="+image.getName());
-                    if(count[image.getIndex()]<3){
+                    if(count[image.getIndex()]<5){
 
                         DisplayAR Pmodel =new DisplayAR(); //เป็น Class ที่ใช้ในการแสดงผลทั้งในส่วน VDO และ 3D
                         Pmodel.setCardname(cardname);//---ส่งชุดบัตรคำไปที่ class เพื่อนำไปใช้งานต่อไผ
@@ -237,20 +237,23 @@ public class MainActivity extends AppCompatActivity {
 
             if(clear){
 
-                DisplayAR Pmodel1= new DisplayAR();
+                /*DisplayAR Pmodel1= new DisplayAR();
                 Pmodel1.Clear_Scene();//---- ลบทุก Model ออกจาก scence
                 //---reset count ที่set การเรียกModel ทั้งหมด
                 resetCount();
 
-                Log.e("LOG","Clear Screen");
-                clear= false;
 
-             /*
+
+                 */
+
+                Log.e("LOG","Clear Screen");
+
                 Intent i  =new Intent(getBaseContext(),MainActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
+                clear= false;
 
-              */
+
 
 
             }
