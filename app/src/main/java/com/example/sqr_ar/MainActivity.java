@@ -2,6 +2,8 @@ package com.example.sqr_ar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private int[] count ;//---เก็บจำนวนในการเรียก active Model โดนจะเก็บตาม index ของชุดบัตรคำใน DB เลย
     private  boolean Set_txt= true;
 
+
     ArrayList<String> cardname = new ArrayList<>();//-- เก็บบัตรคำทั้งหมดที่มีอยู่ใน DB
 
     String Ftxt= "occupationDB.imgdb-imglist.txt";//-เก็บชื่อรูปทั้งหมดที่อยู่ใน database
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         but_3d = (ImageButton)findViewById(R.id.but_3d);
         clearbut = (ImageButton) findViewById(R.id.eraser_but);
         status_txt= (TextView)findViewById(R.id.txt_status);
+
 
 
         but_3d.setOnClickListener(new View.OnClickListener() {
@@ -232,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             if(clear){
-
+            /*
                 DisplayAR Pmodel1= new DisplayAR();
                 Pmodel1.Clear_Scene();//---- ลบทุก Model ออกจาก scence
                 //---reset count ที่set การเรียกModel ทั้งหมด
@@ -240,6 +244,12 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.e("LOG","Clear Screen");
                 clear= false;
+
+             */
+                Intent i  =new Intent(getBaseContext(),MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+
 
             }
 
