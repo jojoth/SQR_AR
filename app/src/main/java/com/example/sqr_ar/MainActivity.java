@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             if(clear){
-            /*
+
                 DisplayAR Pmodel1= new DisplayAR();
                 Pmodel1.Clear_Scene();//---- ลบทุก Model ออกจาก scence
                 //---reset count ที่set การเรียกModel ทั้งหมด
@@ -245,10 +245,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("LOG","Clear Screen");
                 clear= false;
 
-             */
+             /*
                 Intent i  =new Intent(getBaseContext(),MainActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
+
+              */
 
 
             }
