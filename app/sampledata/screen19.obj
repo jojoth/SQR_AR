@@ -1,0 +1,19 @@
+# Export of plan_small3
+# from Aaro4130 OBJ Exporter v2.0
+mtllib screen19.mtl
+g default
+v -0.15 0 0
+v -0.15 0.3000003 1.072884E-07
+v 0.15 0.3000003 1.072884E-07
+v 0.15 0 0
+vn 0 -2.064766E-07 0.5773506
+vn 0 -2.064766E-07 0.5773506
+vn 0 -2.064766E-07 0.5773506
+vn 0 -2.064766E-07 0.5773506
+vt 0 0
+vt 0 1
+vt 1 1
+vt 1 0
+usemtl defaultMat
+f 3/3/3 2/2/2 1/1/1
+f 4/4/4 3/3/3 1/1/1
