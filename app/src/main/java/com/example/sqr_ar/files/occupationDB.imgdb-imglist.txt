@@ -1,0 +1,2 @@
+musician.jpg|./occupation2/musician.jpg
+singer.jpg|./occupation2/singer.jpg
