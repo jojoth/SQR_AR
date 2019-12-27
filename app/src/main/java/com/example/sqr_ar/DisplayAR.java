@@ -12,7 +12,9 @@ import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
 import com.google.ar.sceneform.SkeletonNode;
+import com.google.ar.sceneform.animation.ModelAnimator;
 import com.google.ar.sceneform.math.Vector3;
+import com.google.ar.sceneform.rendering.AnimationData;
 import com.google.ar.sceneform.rendering.Color;
 import com.google.ar.sceneform.rendering.ExternalTexture;
 import com.google.ar.sceneform.rendering.ModelRenderable;
@@ -34,6 +36,8 @@ public class DisplayAR {
     private  static TransformableNode pre_plan_node;
 
     private  static ArrayMap<String,Integer> vdo_map = new ArrayMap<String, Integer>();
+    private ModelAnimator modelAnimator;
+    private  int i;
 
     public void setArFragment(CustomArFragment arF){
         arFragment= arF;
@@ -199,9 +203,27 @@ public class DisplayAR {
                     skeletonNode.setParent(anchorNode);
                     skeletonNode.setRenderable(modelRenderable);
                     arFragment.getArSceneView().getScene().addChild(anchorNode);
+                    animateModel(modelRenderable);
 
 
                 });
+
+    }
+    private void animateModel(ModelRenderable modelRenderable) {
+
+        if(modelAnimator!=null&&modelAnimator.isRunning())
+            modelAnimator.end();
+
+        int animationCount = modelRenderable.getAnimationDataCount();
+        if(i== animationCount) i=0;
+
+        AnimationData animationData = modelRenderable.getAnimationData(i);
+
+        modelAnimator = new ModelAnimator(animationData,modelRenderable);
+        modelAnimator.start();
+        modelAnimator.setRepeatCount(1000);
+
+
 
     }
 
