@@ -5,15 +5,18 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.widget.Button;
 
 import com.google.ar.core.Anchor;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
+import com.google.ar.sceneform.SkeletonNode;
 import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.Color;
 import com.google.ar.sceneform.rendering.ExternalTexture;
 import com.google.ar.sceneform.rendering.ModelRenderable;
+import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
 import java.util.ArrayList;
@@ -181,7 +184,24 @@ public class DisplayAR {
 
     }
 
-    public void display3D(AnchorNode anchorNode,String cardname){
+    public void display3D(Anchor anchor, String cardname, ArFragment arFragment,Context contxt){
+
+        String realname = cardname.split("\\.")[0]; //--- อันนี้คือชื่อcardname ชื่อเดียวกับ Model
+        String model_3d = realname+".sfb";
+
+        ModelRenderable
+                .builder()
+                .setSource(contxt, Uri.parse(model_3d))///---- URI--- ให้ใส่ชื่อไฟล์ 3d model .sfb
+                .build()
+                .thenAccept(modelRenderable -> {
+                    AnchorNode anchorNode = new AnchorNode(anchor);
+                    SkeletonNode skeletonNode = new SkeletonNode();
+                    skeletonNode.setParent(anchorNode);
+                    skeletonNode.setRenderable(modelRenderable);
+                    arFragment.getArSceneView().getScene().addChild(anchorNode);
+
+
+                });
 
     }
 

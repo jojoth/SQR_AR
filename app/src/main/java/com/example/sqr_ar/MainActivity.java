@@ -29,6 +29,7 @@ import com.google.ar.sceneform.rendering.ModelRenderable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.security.interfaces.DSAKey;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private String plan_name="screen19.sfb";// ตัว Model Plan ที่เรียกมาใช้งาน
 
     private Set<String> cardset;
+    private  boolean[] show_model;
     //float inc_an= 5f;
 
     private String mode ="vdo";
@@ -117,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         cardset = new HashSet<String>(cardname);
 
         count = new int[cardname.size()];
+        show_model= new boolean[cardname.size()];
 
         resetCount();
 
@@ -129,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i=0; i<cardname.size();i++){
             count[i]=0;
+            show_model[0]= false;
         }
         Set_txt =true;
 
@@ -189,11 +193,21 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("LOG","+++++Tracking Found SET cardset ="+image.getName());
                     if(count[image.getIndex()]<5){
 
-                        DisplayAR Pmodel =new DisplayAR(); //เป็น Class ที่ใช้ในการแสดงผลทั้งในส่วน VDO และ 3D
-                        Pmodel.setCardname(cardname);//---ส่งชุดบัตรคำไปที่ class เพื่อนำไปใช้งานต่อไผ
-                        Pmodel.SetVideo(image.getName(),this,plan_name);//-- ส่งชื่อรูปที่มันdetectเจอเพื่อใช้สำหรับเรียกไฟล์  model หรือ video
+                        if(mode.contains("3d")&&!show_model[image.getIndex()]) {
 
-                        Pmodel.playVideo(image.createAnchor(image.getCenterPose()),image.getExtentX(),image.getExtentZ(),image.getName());
+                            DisplayAR Dmodel = new DisplayAR();
+                            Dmodel.display3D(image.createAnchor(image.getCenterPose()),image.getName(),arFragment,this);
+
+                            show_model[image.getIndex()]=  true;
+
+                        }else {
+
+                            DisplayAR Pmodel = new DisplayAR(); //เป็น Class ที่ใช้ในการแสดงผลทั้งในส่วน VDO และ 3D
+                            Pmodel.setCardname(cardname);//---ส่งชุดบัตรคำไปที่ class เพื่อนำไปใช้งานต่อไผ
+                            Pmodel.SetVideo(image.getName(), this, plan_name);//-- ส่งชื่อรูปที่มันdetectเจอเพื่อใช้สำหรับเรียกไฟล์  model หรือ video
+
+                            Pmodel.playVideo(image.createAnchor(image.getCenterPose()), image.getExtentX(), image.getExtentZ(), image.getName());
+                        }
 
                         status_txt.setText("พบตำแหน่งของรูป");
                     }else{
